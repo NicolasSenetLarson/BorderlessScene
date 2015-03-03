@@ -1,4 +1,4 @@
-# borderless-scene
+# BorderlessScene
 JavaFX "Undecorated" Scene with all basic window controls including Windows Aero Snap.
 
 Create a no-border JavaFX Scene with move, resize, minimise, maximise, close and Windows Aero Snap controls.
