@@ -164,7 +164,6 @@ public class BorderlessController {
 					
 					eventSource.x = mouseEvent.getScreenX();
 					eventSource.y = node.prefHeight(primaryStage.getHeight());
-					System.out.println(eventSource.y);
 				}
 			}
 		});
