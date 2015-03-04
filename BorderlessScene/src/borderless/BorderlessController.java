@@ -68,21 +68,21 @@ public class BorderlessController {
 	 * Reference to main application.
 	 * @param primaryStage the main application stage.
 	 */
-	public void setMainApp(Stage primaryStage) {
+	protected void setMainApp(Stage primaryStage) {
 		this.primaryStage = primaryStage;
 	}
 
 	/**
 	 * Close the application.
 	 */
-	public void closeApp() {
+	protected void closeApp() {
 		primaryStage.close();
 	}
 
 	/**
 	 * Maximise on/off the application.
 	 */
-	public void maximise() {
+	protected void maximise() {
 		Rectangle2D screen = ((Screen) Screen.getScreensForRectangle(primaryStage.getX(), primaryStage.getY(),
 				primaryStage.getWidth() / 2, primaryStage.getHeight() / 2).get(0)).getVisualBounds();
 		
@@ -133,7 +133,7 @@ public class BorderlessController {
 	/**
 	 * Minimise the application.
 	 */
-	public void minimise() {
+	protected void minimise() {
 		primaryStage.setIconified(true);
 	}
 
@@ -141,7 +141,7 @@ public class BorderlessController {
 	 * Set a node that can be pressed and dragged to move the application around.
 	 * @param node the node.
 	 */
-	public void setMoveControl(final Node node) {
+	protected void setMoveControl(final Node node) {
 		final Delta delta = new Delta();
 		final Delta eventSource = new Delta();
 
