@@ -2,20 +2,18 @@ package borderless;
 
 import java.io.IOException;
 
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
+import borderless.BorderlessController.Delta;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 /**
- * Create an undecorated JavaFX Scene with move, resize, minimise, maximise, close and Windows Aero Snap controls.
+ * Undecorated JavaFX Scene with implemented move, resize, minimise, maximise and Windows Aero Snap controls.
  * 
  * Usage:
  * <pre>
@@ -24,19 +22,25 @@ import javafx.stage.StageStyle;
  * BorderlessScene scene = new BorderlessScene(yourPrimaryStage, yourParent);
  * yourPrimaryStage.setScene(scene); // Set the scene to your stage and you're done!
  * 
- * // To give window controls to your buttons:
- * scene.setCloseButton(button);
- * scene.setMaximiseButton(button);
- * scene.setMinimiseButton(button);
+ * // Maximise (on/off) and minimise the application:
+ * scene.maximise();
+ * scene.minimise();
  * 
  * // To move the window around by pressing a node:
  * scene.setMoveControl(yourNode);
  * 
  * // To disable resize:
- * scene.setResize(false);
+ * scene.setResizable(false);
  * 
  * // To switch the content during runtime:
  * scene.setContent(yourNewParent);
+ * 
+ * // Check if maximised:
+ * Boolean bool = scene.isMaximised();
+ * 
+ * // Get windowed size and position:
+ * scene.getWindowedSize();
+ * scene.getWindowedPosition();
  * }
  * </pre>
  * 
@@ -93,46 +97,48 @@ public class BorderlessScene extends Scene {
 	}
 
 	/**
-	 * Set the default close button of your application.
-	 * @param button the button that closes you application.
+	 *  Toggle to maximise the application.
 	 */
-	public void setCloseButton(Button button) {
-		button.setOnAction(new EventHandler<ActionEvent>() {
-			public void handle(ActionEvent event) {
-				controller.closeApp();
-			}
-		});
+	public void maximise() {
+		controller.maximise();
 	}
 
 	/**
-	 *  Set the maximise window button.
-	 * @param button the button that maximises your application.
+	 * Minimise the application to the taskbar.
 	 */
-	public void setMaximiseButton(Button button) {
-		button.setOnAction(new EventHandler<ActionEvent>() {
-			public void handle(ActionEvent event) {
-				controller.maximise();
-			}
-		});
-	}
-
-	/**
-	 * Set the minimise window button.
-	 * @param button the button that minimises your application.
-	 */
-	public void setMinimiseButton(Button button) {
-		button.setOnAction(new EventHandler<ActionEvent>() {
-			public void handle(ActionEvent event) {
-				controller.minimise();
-			}
-		});
+	public void minimise() {
+		controller.minimise();
 	}
 	
 	/**
 	 * Disable/enable the resizing of your application. Enabled by default.
 	 * @param bool false to disable, true to enable.
 	 */
-	public void setResize(Boolean bool) {
-		this.controller.setResizable(bool);
+	public void setResizable(Boolean bool) {
+		controller.setResizable(bool);
+	}
+	
+	/**
+	 * Check the maximised state of the application.
+	 * @return true if the window is maximised.
+	 */
+	public Boolean isMaximised() {
+		return controller.maximised;
+	}
+	
+	/**
+	 * Returns the width and height of the application when windowed.
+	 * @return instance of Delta class. Delta.x = width, Delta.y = height.
+	 */
+	public Delta getWindowedSize() {
+		return controller.prevSize;
+	}
+	
+	/**
+	 * Returns the x and y position of the application when windowed.
+	 * @return instance of Delta class. Use Delta.x and Delta.y.
+	 */
+	public Delta getWindowedPositon() {
+		return controller.prevPos;
 	}
 }

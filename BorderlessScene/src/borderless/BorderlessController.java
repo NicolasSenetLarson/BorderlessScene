@@ -11,16 +11,16 @@ import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 /**
- * Controller implements window controls: close, maximise, minimise, move, and Windows Aero Snap.
+ * Controller implements window controls: maximise, minimise, move, and Windows Aero Snap.
  * 
  * @author Nicolas Senet-Larson
  * @version 1.0
  */
 public class BorderlessController {
 	private Stage primaryStage;
-	private Delta prevSize;
-	private Delta prevPos;
-	private boolean maximised;
+	protected Delta prevSize;
+	protected Delta prevPos;
+	protected boolean maximised;
 	private boolean snapped;
 	@FXML
 	private Pane leftPane;
@@ -70,13 +70,6 @@ public class BorderlessController {
 	 */
 	protected void setMainApp(Stage primaryStage) {
 		this.primaryStage = primaryStage;
-	}
-
-	/**
-	 * Close the application.
-	 */
-	protected void closeApp() {
-		primaryStage.close();
 	}
 
 	/**
@@ -361,7 +354,7 @@ public class BorderlessController {
 		});
 	}
 
-	private void isMaximised(Boolean maximised) {
+	protected void isMaximised(Boolean maximised) {
 		this.maximised = maximised;
 		setResizable(!maximised);
 	}

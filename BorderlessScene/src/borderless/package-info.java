@@ -1,5 +1,5 @@
 /**
- * Create an undecorated JavaFX Scene with move, resize, minimise, maximise, close and Windows Aero Snap controls.
+ * Undecorated JavaFX Scene with implemented move, resize, minimise, maximise and Windows Aero Snap controls.
  * 
  * Usage:
  * <pre>
@@ -8,19 +8,25 @@
  * BorderlessScene scene = new BorderlessScene(yourPrimaryStage, yourParent);
  * yourPrimaryStage.setScene(scene); // Set the scene to your stage and you're done!
  * 
- * // To give window controls to your buttons:
- * scene.setCloseButton(button);
- * scene.setMaximiseButton(button);
- * scene.setMinimiseButton(button);
+ * // Maximise (on/off) and minimise the application:
+ * scene.maximise();
+ * scene.minimise();
  * 
  * // To move the window around by pressing a node:
  * scene.setMoveControl(yourNode);
  * 
  * // To disable resize:
- * scene.setResize(false);
+ * scene.setResizable(false);
  * 
  * // To switch the content during runtime:
  * scene.setContent(yourNewParent);
+ * 
+ * // Check if maximised:
+ * Boolean bool = scene.isMaximised();
+ * 
+ * // Get windowed size and position:
+ * scene.getWindowedSize();
+ * scene.getWindowedPosition();
  * }
  * </pre>
  * 
