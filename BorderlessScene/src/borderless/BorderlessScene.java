@@ -2,7 +2,6 @@ package borderless;
 
 import java.io.IOException;
 
-import borderless.BorderlessController.Delta;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -50,6 +49,7 @@ import javafx.stage.StageStyle;
 public class BorderlessScene extends Scene {
 	private BorderlessController controller;
 	private AnchorPane root;
+	private Stage primaryStage;
 	
 	/**
 	 * The constructor.
@@ -70,6 +70,7 @@ public class BorderlessScene extends Scene {
 			this.controller.setMainApp(primaryStage);
 
 			primaryStage.initStyle(StageStyle.UNDECORATED);
+			this.primaryStage = primaryStage;
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -131,6 +132,10 @@ public class BorderlessScene extends Scene {
 	 * @return instance of Delta class. Delta.x = width, Delta.y = height.
 	 */
 	public Delta getWindowedSize() {
+		if (controller.prevSize.x == null)
+			controller.prevSize.x = primaryStage.getWidth();
+		if (controller.prevSize.y == null)
+			controller.prevSize.y = primaryStage.getHeight();
 		return controller.prevSize;
 	}
 	
@@ -139,6 +144,10 @@ public class BorderlessScene extends Scene {
 	 * @return instance of Delta class. Use Delta.x and Delta.y.
 	 */
 	public Delta getWindowedPositon() {
+		if (controller.prevPos.x == null)
+			controller.prevPos.x = primaryStage.getX();
+		if (controller.prevPos.y == null)
+			controller.prevPos.y = primaryStage.getY();
 		return controller.prevPos;
 	}
 }

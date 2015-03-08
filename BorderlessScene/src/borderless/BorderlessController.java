@@ -53,7 +53,7 @@ public class BorderlessController {
 	 * Called after the FXML layout is loaded.
 	 */
 	@FXML
-	private void initialize() {
+	private void initialize() {		
 		setResizeControl(leftPane, "left");
 		setResizeControl(rightPane, "right");
 		setResizeControl(topPane, "top");
@@ -369,6 +369,4 @@ public class BorderlessController {
 		bottomLeftPane.setDisable(!bool);
 		bottomRightPane.setDisable(!bool);
 	}
-	
-	class Delta {double x,y;}
 }
