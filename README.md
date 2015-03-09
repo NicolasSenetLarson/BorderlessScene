@@ -23,7 +23,8 @@ scene.setContent(yourNewParent);
 // Check if maximised:
 Boolean bool = scene.isMaximised();
 
-// Get windowed size and position:
+// Get windowed* size and position:
 scene.getWindowedSize();
 scene.getWindowedPosition();
 ```
+*windowed = not maximised
