@@ -76,8 +76,15 @@ public class BorderlessController {
 	 * Maximise on/off the application.
 	 */
 	protected void maximise() {
-		Rectangle2D screen = ((Screen) Screen.getScreensForRectangle(primaryStage.getX(), primaryStage.getY(),
-				primaryStage.getWidth() / 2, primaryStage.getHeight() / 2).get(0)).getVisualBounds();
+		Rectangle2D screen;
+		if (Screen.getScreensForRectangle(primaryStage.getX(), primaryStage.getY(),primaryStage.getWidth() / 2,
+				primaryStage.getHeight() / 2).size() == 0) {
+			screen = ((Screen) Screen.getScreensForRectangle(primaryStage.getX(), primaryStage.getY(),
+					primaryStage.getWidth(), primaryStage.getHeight()).get(0)).getVisualBounds();
+		} else {
+			screen = ((Screen) Screen.getScreensForRectangle(primaryStage.getX(), primaryStage.getY(),
+					primaryStage.getWidth() / 2, primaryStage.getHeight() / 2).get(0)).getVisualBounds();
+		}
 		
 		if (maximised) {
 			primaryStage.setWidth(prevSize.x);
