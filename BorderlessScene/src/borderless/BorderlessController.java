@@ -80,31 +80,10 @@ public class BorderlessController {
 				primaryStage.getWidth() / 2, primaryStage.getHeight() / 2).get(0)).getVisualBounds();
 		
 		if (maximised) {
-			if (screen.contains(prevPos.x, prevPos.y)) {	// Un-maximise if maximise was in same screen.
-				primaryStage.setWidth(prevSize.x);
-				primaryStage.setHeight(prevSize.y);
-				primaryStage.setX(prevPos.x);
-				primaryStage.setY(prevPos.y);
-			} else {										// Else un-maximise and fit to new screen size.
-				if (prevSize.x > screen.getWidth())
-					if (primaryStage.getMinWidth() < screen.getWidth() - 20)
-						primaryStage.setWidth(screen.getWidth() - 20);
-					else
-						primaryStage.setWidth(primaryStage.getMinWidth());
-				else
-					primaryStage.setWidth(prevSize.x);
-				
-				if (prevSize.y > screen.getHeight())
-					if (primaryStage.getMinHeight() < screen.getHeight() - 20)
-						primaryStage.setHeight(screen.getHeight() - 20);
-					else
-						primaryStage.setHeight(primaryStage.getMinHeight());
-				else
-					primaryStage.setHeight(prevSize.y);
-				
-				primaryStage.setX(screen.getMinX() + (screen.getWidth() - primaryStage.getWidth()) / 2);
-				primaryStage.setY(screen.getMinY() + (screen.getHeight() - primaryStage.getHeight()) / 2);
-			}
+			primaryStage.setWidth(prevSize.x);
+			primaryStage.setHeight(prevSize.y);
+			primaryStage.setX(prevPos.x);
+			primaryStage.setY(prevPos.y);
 			isMaximised(false);
 		} else {
 			// Record position and size, and maximise.
@@ -113,7 +92,17 @@ public class BorderlessController {
 				prevSize.y = primaryStage.getHeight();
 				prevPos.x = primaryStage.getX();
 				prevPos.y = primaryStage.getY();
+			} else if (!screen.contains(prevPos.x, prevPos.y)) {
+				if (prevSize.x > screen.getWidth())
+					prevSize.x = screen.getWidth() - 20;
+				
+				if (prevSize.y > screen.getHeight())
+					prevSize.y = screen.getHeight() - 20;
+				
+				prevPos.x = screen.getMinX() + (screen.getWidth() - prevSize.x)/2;
+				prevPos.y = screen.getMinY() +  (screen.getHeight() - prevSize.y)/2;
 			}
+			
 			primaryStage.setX(screen.getMinX());
 			primaryStage.setY(screen.getMinY());
 			primaryStage.setWidth(screen.getWidth());
@@ -243,6 +232,17 @@ public class BorderlessController {
 					
 					// Aero Snap Top.
 					else if (mouseEvent.getScreenY() == screen.getMinY()) {
+						if (!screen.contains(prevPos.x, prevPos.y)) {
+							if (prevSize.x > screen.getWidth())
+								prevSize.x = screen.getWidth() - 20;
+							
+							if (prevSize.y > screen.getHeight())
+								prevSize.y = screen.getHeight() - 20;
+							
+							prevPos.x = screen.getMinX() + (screen.getWidth() - prevSize.x)/2;
+							prevPos.y = screen.getMinY() +  (screen.getHeight() - prevSize.y)/2;
+						}
+						
 						primaryStage.setX(screen.getMinX());
 						primaryStage.setY(screen.getMinY());
 						primaryStage.setWidth(screen.getWidth());
